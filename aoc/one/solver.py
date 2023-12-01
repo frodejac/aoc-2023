@@ -1,4 +1,6 @@
+import os
 import re
+import sys
 
 
 def part1(lines):
@@ -60,5 +62,9 @@ def solve(inputpath):
     return part1(data), part2(data)
 
 
+def main():
+    print(solve("aoc/one/input.txt"))
+
+
 if __name__ == "__main__":
-    print(solve("input.txt"))
+    main()
