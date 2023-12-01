@@ -26,33 +26,36 @@ def output(results, elapsed, w=20, d=6):
 def main():
     t0 = time.time()
     with multiprocessing.Pool() as pool:
-        results = pool.map(solve, (
-            "eight",
-            "eighteen",
-            "eleven",
-            "fifteen",
-            "five",
-            "four",
-            "fourteen",
-            "nine",
-            "nineteen",
-            "one",
-            "seven",
-            "seventeen",
-            "six",
-            "sixteen",
-            "ten",
-            "thirteen",
-            "three",
-            "twelve",
-            "twenty",
-            "twentyfive",
-            "twentyfour",
-            "twentyone",
-            "twentythree",
-            "twentytwo",
-            "two",
-        ))
+        results = pool.map(
+            solve,
+            (
+                "eight",
+                "eighteen",
+                "eleven",
+                "fifteen",
+                "five",
+                "four",
+                "fourteen",
+                "nine",
+                "nineteen",
+                "one",
+                "seven",
+                "seventeen",
+                "six",
+                "sixteen",
+                "ten",
+                "thirteen",
+                "three",
+                "twelve",
+                "twenty",
+                "twentyfive",
+                "twentyfour",
+                "twentyone",
+                "twentythree",
+                "twentytwo",
+                "two",
+            ),
+        )
     elapsed = time.time() - t0
     output(results, elapsed)
 
