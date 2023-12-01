@@ -59,7 +59,7 @@ jobs:
             mv "./src/$path" "./dst/2023/frodejac/$path"
           done
       - name: Configure git
-        working-directory: ./src
+        working-directory: ./dst
         run: |
           git config --local user.name 'Frode Jacobsen'
           git config --local user.email '6934246+frodejac@users.noreply.github.com'
