@@ -7,9 +7,6 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    defaults:
-      run:
-        working-directory: ./backend
     steps:
       - uses: actions/checkout@v4
         with:
@@ -21,7 +18,7 @@ jobs:
         id: cached-poetry
         with:
           path: .venv
-          key: poetry-${{ hashFiles('backend/poetry.lock') }}
+          key: poetry-${{ hashFiles('poetry.lock') }}
       - if: steps.cached-poetry.outputs.cache-hit != 'true'
         uses: snok/install-poetry@v1
         with:
