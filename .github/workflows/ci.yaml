@@ -64,7 +64,7 @@ jobs:
           git config --local user.name 'Frode Jacobsen'
           git config --local user.email '6934246+frodejac@users.noreply.github.com'
       - name: Get diff
-        working-directory: ./src
+        working-directory: ./dst
         env:
           author: ${{ steps.commit-details.outputs.author }}
           message: ${{steps.commit-details.outputs.message }}
