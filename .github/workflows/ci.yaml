@@ -67,7 +67,7 @@ jobs:
         working-directory: ./dst
         env:
           author: ${{ steps.commit-details.outputs.author }}
-          message: ${{steps.commit-details.outputs.message }}
+          message: ${{steps.commit-details.outputs.title }}
           sha: ${{ github.sha }}
         run: |
           set -ex
