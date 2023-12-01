@@ -40,7 +40,7 @@ jobs:
           fetch-depth: 0
       - name: Get commit details
         id: commit-details
-        working-directory: ./repo
+        working-directory: ./src
         run: |
           echo "author=$(git log -1 --pretty=format:'%an <%ae>')" >> $GITHUB_OUTPUT
           echo "title=$(git log -1 --pretty=format:'%s')" >> $GITHUB_OUTPUT
