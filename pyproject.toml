@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "aoc-2023"
+version = "0.1.0"
+description = ""
+authors = ["Frode Jacobsen <frode@aidn.no>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+isort = "^5.12.0"
+
+
+[tool.poetry.group.dev.dependencies]
+fixit = "^2.1.0"
+black = "^23.11.0"
+pyright = "^1.1.338"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
