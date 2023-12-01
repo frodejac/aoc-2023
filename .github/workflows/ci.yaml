@@ -73,8 +73,8 @@ jobs:
           set -ex
           git add .
           if [[ -n "$(git diff --name-only --cached)" ]]; then
-            echo "$(git diff --cached)"
-            echo "${message} (https://github.com/frodejac/aoc-2023/commit/${sha})"
+            git commit --author "${author}" -m "${message} (https://github.com/frodejac/aoc-2023/commit/${sha})"
+            git push
           else
             echo "No diff, no push"
           fi
