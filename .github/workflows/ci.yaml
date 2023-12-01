@@ -77,4 +77,5 @@ jobs:
             echo "${message} (https://github.com/frodejac/aoc-2023/commit/${sha})"
           else
             echo "No diff, no push"
+          fi
       
