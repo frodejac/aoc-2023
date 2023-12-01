@@ -28,3 +28,54 @@ jobs:
       - if: steps.cached-poetry.outputs.cache-hit != 'true'
         run: poetry install
       - run: poetry run ./lint.sh
+
+  copy:
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          path: ./src
+          fetch-depth: 0
+      - name: Get commit details
+        id: commit-details
+        working-directory: ./repo
+        run: |
+          echo "author=$(git log -1 --pretty=format:'%an <%ae>')" >> $GITHUB_OUTPUT
+          echo "title=$(git log -1 --pretty=format:'%s')" >> $GITHUB_OUTPUT
+      - name: Checkout common AoC repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          repository: AidnAS/advent-of-code
+          path: ./dst
+      - name: Move files
+        run: |
+          set -ex
+          rm -rf ./dst/2023/frodejac
+          mkdir -p ./dst/2023/frodejac
+          for path in README.md poetry.lock pyproject.toml .gitignore aoc; do
+            mv "./src/$path" "./dst/2023/frodejac/$path"
+          done
+      - name: Configure git
+        working-directory: ./src
+        run: |
+          git config --local user.name 'Frode Jacobsen'
+          git config --local user.email '6934246+frodejac@users.noreply.github.com'
+      - name: Get diff
+        working-directory: ./src
+        env:
+          author: ${{ steps.commit-details.outputs.author }}
+          message: ${{steps.commit-details.outputs.message }}
+          sha: ${{ github.sha }}
+        run: |
+          set -ex
+          git add .
+          if [[ -n "$(git diff --name-only --cached)" ]]; then
+            echo "$(git diff --cached)"
+            echo "${message} (https://github.com/frodejac/aoc-2023/commit/${sha})"
+          else
+            echo "No diff, no push"
+      
