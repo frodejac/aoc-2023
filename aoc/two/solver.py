@@ -1,11 +1,6 @@
 from functools import reduce
 
 
-def parse_line_2(line):
-    header, game = line.split(":")
-    return int(header[5:]), game
-
-
 def part1(lines):
     return sum(
         (
