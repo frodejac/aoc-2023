@@ -5,3 +5,4 @@ isort . --check
 pyright --warnings
 fixit lint
 flake8
+vulture .
