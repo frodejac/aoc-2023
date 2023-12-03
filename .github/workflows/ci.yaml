@@ -28,10 +28,35 @@ jobs:
         run: poetry install
       - run: poetry run ./lint.sh
 
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - uses: snok/install-poetry@v1
+        with:
+          version: 1.6.1
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+      - uses: actions/cache@v3
+        id: cached-poetry
+        with:
+          path: .venv
+          key: poetry-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
+      - if: steps.cached-poetry.outputs.cache-hit != 'true'
+        run: poetry install
+      - run: poetry run pytest
+
   forward:
     runs-on: ubuntu-latest
     needs:
       - lint
+      - test
     if: "!contains(github.event.head_commit.message, '!noforward')"
     steps:
       - name: Checkout this repo
