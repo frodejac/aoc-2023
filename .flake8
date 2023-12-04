@@ -1,4 +1,5 @@
 [flake8]
 exclude =
     .venv
+    aoc/four/golf.py
 max-line-length = 88
