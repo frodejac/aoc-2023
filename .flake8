@@ -2,4 +2,5 @@
 exclude =
     .venv
     aoc/four/golf.py
+    aoc/six/golf.py
 max-line-length = 88
