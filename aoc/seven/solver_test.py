@@ -1,6 +1,6 @@
 import pytest
 
-from .solver import parse, part1, part2
+from .solver import part1, part2
 
 
 @pytest.fixture(scope="module")

@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -e
-black . --check
-isort . --check
+ruff check
 pyright --warnings
 fixit lint
-flake8
 vulture .
